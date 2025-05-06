@@ -1,5 +1,7 @@
 # TAKECare
-The data and code for the TAKECare framework, TAKECare: A Temporal-Hierarchical Framework with Knowledge Fusion for Personalized Clinical Predictive Modeling. Related code and data will be published in a new repository after review.
+The data and code for the TAKECare framework (TAKECare: A Temporal-Hierarchical Framework with Knowledge Fusion for Personalized Clinical Predictive Modeling) for review. 
+
+Related code and data will be published in a new repository after review.
 
 ## 1. Install dependecies
 Install the required packages, We recommend installing these key packages with the following command.
@@ -44,11 +46,12 @@ After downloading the raw dataset, put these required files in the folder path: 
 + DIAGNOSES_ICD.csv, PROCEDURES_ICD.csv, PRESCRIPTIONS.csv (diagnosis, procedure, prescription information)
 + D_ICD_DIAGNOSES.csv, D_ICD_PROCEDURES.csv (dictionary tables for diagnosis and procedure)
 
+
 ## 3. Folder Specification
 
 - `data/`  only contains part of the data. See the **Data** section for more details
   - `input/` 
-    - `drug-atc.csv`, `ndc2atc_level4.csv`, `ndc2rxnorm_mapping.txt`: mapping files for drug code transformation
+    - `drug-atc.csv`, `ndc2atc_level.csv`, `ndc2rxnorm_mapping.txt`: mapping files for drug code transformation
     - `idx2ndc.pkl`: It maps ATC code to rxnorm code and then query to drugbank
     - `idx2drug.pkl`: Drug ID to drug SMILES string dictionary
       
@@ -62,12 +65,16 @@ After downloading the raw dataset, put these required files in the folder path: 
   - `processing.py`: The python script responsible for generating `voc_final.pkl`, `records_final.pkl`, and `ddi_final.pkl`   
 
 - `src/` folder contains all the source code
-  - `baselines.py`: Code for baseline models
-  - `util.py`: Code for metric calculations and some data preparation
-  - `training.py`: Code for the functions used in training and evaluation
-  - `main.py`: Train or evaluate our Model
-  - `Statistic_DDI_rate.py`: DDI rate and number statistic
- 
+  - `baselines.py`: Code for baseline models used for comparison (including: RETAIN, GRAM, KAME, StageNet, HiTANet, GCT, TRANS, G-BERT, GAMENet, SafeDrug, COGNet, DrugRec)
+  - `code_initializer.py`: Medical code initialization (UMLS graph construction, SapBERT encoding, knowledge path aggregation, InfoNCE regularization)
+  - `patient_encoder.py`: Patient representation learning (temporal hypergraph propagation via LeafMP, hierarchical co-occurrence via AnceMP)
+  - `model.py`: Full model definition integrating code initializer and patient encoder, with clinical prediction heads and loss functions
+  - `data_and_utils.py`: Unified module for data loading, MedKG graph construction, patient splitting, and utility functions
+  - `training.py`: Training and evaluation routines for clinical prediction tasks (e.g., diagnosis and prescription)
+  - `main.py`: Entrypoint to run training or testing
+  - `Statistic_DDI_rate.py`: Script for computing DDI rate and counting adverse interactions
+
+
 ## 4. Run our project
 
 ```
@@ -75,6 +82,7 @@ python main.py [-h] [--Test] [--model_name MODEL_NAME]
                        [--resume_path RESUME_PATH] [--lr LR]
                        [--target_ddi TARGET_DDI] [--kp KP] [--dim DIM]
 ```
+
 
 ## 5. Tips
 Welcome to contact me for any question.
