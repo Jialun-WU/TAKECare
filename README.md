@@ -68,10 +68,8 @@ After downloading the raw dataset, put these required files in the folder path: 
   - `baselines.py`: Code for baseline models used for comparison (including: RETAIN, GRAM, KAME, StageNet, HiTANet, GCT, TRANS, G-BERT, GAMENet, SafeDrug, COGNet, DrugRec)
   - `code_initializer.py`: Medical code initialization (UMLS graph construction, SapBERT encoding, knowledge path aggregation, InfoNCE regularization)
   - `patient_encoder.py`: Patient representation learning (temporal hypergraph propagation via LeafMP, hierarchical co-occurrence via AnceMP)
-  - `model.py`: Full model definition integrating code initializer and patient encoder, with clinical prediction heads and loss functions
-  - `data_and_utils.py`: Unified module for data loading, MedKG graph construction, patient splitting, and utility functions
-  - `training.py`: Training and evaluation routines for clinical prediction tasks (e.g., diagnosis and prescription)
-  - `main.py`: Entrypoint to run training or testing
+  - `model.py`: Full model definition integrating code initializer and patient encoder, with clinical prediction heads and loss functions, Training and evaluation routines for clinical prediction tasks
+  - `utils.py`: Unified module for data loading, MedKG graph construction, patient splitting, and utility functions
   - `Statistic_DDI_rate.py`: Script for computing DDI rate and counting adverse interactions
 
 
